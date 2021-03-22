@@ -11,7 +11,7 @@ import SwiftUI
 struct layoutappApp: App {
     var body: some Scene {
         WindowGroup {
-            JSONParse()
+            CombineView()
         }
     }
 }

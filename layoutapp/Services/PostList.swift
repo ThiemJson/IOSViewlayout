@@ -10,7 +10,6 @@ import SwiftUI
 struct PostList: View {
     var body: some View {
         Text("Hello, World!")
-            
     }
 }
 
