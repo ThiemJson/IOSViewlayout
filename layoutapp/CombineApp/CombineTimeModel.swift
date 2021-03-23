@@ -7,4 +7,6 @@
 
 import Foundation
 
-struct CombineTimeModel
+struct CombineTimeModel {
+    let second : Int
+}
