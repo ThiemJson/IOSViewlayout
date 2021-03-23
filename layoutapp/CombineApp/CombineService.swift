@@ -24,6 +24,15 @@ struct CombineService {
         }
     }
     
+    static func fetchModel(completion:  @escaping (Result<CombineTimeModel, Error>) -> ()){
+        CombineService.mockData.forEach { (value) in
+            let delay = DispatchTimeInterval.seconds(value)
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                completion(Result.success(CombineTimeModel(second: value)))
+            }
+        }
+    }
+    
     struct CombineServiceError {
         static let invalid = NSError(domain: "Number 8 is invalid", code: 1, userInfo: nil)
     }
