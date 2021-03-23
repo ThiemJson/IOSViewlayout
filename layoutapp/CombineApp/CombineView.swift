@@ -18,9 +18,17 @@ struct CombineView: View {
                     .foregroundColor(.gray)
             }
             Text(self.combineViewModel.time)
+            Text(self.combineViewModel.seconds)
+                .foregroundColor(.red)
         }
         .padding()
         .font(.system(size: 36, weight: .bold))
+//        .onReceive(self.combineViewModel.$seconds) { (outputValuee) in
+//            print("Second: \(outputValuee)")
+//        }
+//        .onReceive(self.combineViewModel.$time) { (outputValuee) in
+//            print("Time: \(outputValuee)")
+//        }
     }
 }
 
