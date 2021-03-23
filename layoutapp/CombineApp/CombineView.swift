@@ -10,17 +10,17 @@ import SwiftUI
 struct CombineView: View {
     @StateObject private var combineViewModel = CombineViewModel()
     var body: some View {
-        Button(action: {
-            self.combineViewModel.startFetch()
-        }){
-            Text("Fetch data")
-                .foregroundColor(.gray)
+        return ScrollView{
+            Button(action: {
+                self.combineViewModel.startFetch()
+            }){
+                Text("Fetch data")
+                    .foregroundColor(.gray)
+            }
+            Text(self.combineViewModel.time)
         }
-        
-        
-        .onReceive(self.combineViewModel.objectWillChange) { (value) in
-            print("==> \(value)")
-        }
+        .padding()
+        .font(.system(size: 36, weight: .bold))
     }
 }
 

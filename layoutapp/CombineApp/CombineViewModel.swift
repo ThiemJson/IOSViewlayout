@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 class CombineViewModel : ObservableObject {
+    @Published var time: String = "0 seconds"
     var passhroughSubject = PassthroughSubject<String, Error>()
     private var cancellables : Set<AnyCancellable> = []
     
@@ -17,14 +18,15 @@ class CombineViewModel : ObservableObject {
             (completion) in
             switch completion {
             case .finished:
-                print("finished")
+                self.time = "Finished"
                 break
             case .failure(let error):
                 print(error.localizedDescription)
+                self.time = error.localizedDescription
                 break
             }
         } receiveValue: { (value) in
-            print(value)
+            self.time = value
         }.store(in: &cancellables)
     }
     
