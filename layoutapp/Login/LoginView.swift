@@ -13,6 +13,7 @@ struct LoginView: View {
     
     @StateObject var  loginViewModel = LoginViewModel()
     var body: some View {
+        print("render LoginView")
         return NavigationView {
             ZStack {
                 if self.loginViewModel.authentication == Authentication.Loadding{
@@ -29,7 +30,7 @@ struct LoginView: View {
                             .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                             .padding()
                             .frame(width: 200, height:200)
-                        
+//                        Text(self.username)
                         VStack(alignment: .leading, spacing: 10, content: {
                             Text("Username")
                                 .foregroundColor(.blue)
@@ -52,7 +53,7 @@ struct LoginView: View {
                                 .foregroundColor(.blue)
                                 .fontWeight(.heavy)
                                 .font(.title3)
-                            TextField("password", text: $password)
+                            SecureField("password", text: $password)
                                 .textFieldStyle(PlainTextFieldStyle())
                                 .cornerRadius(20)
                                 .frame(height: 50)

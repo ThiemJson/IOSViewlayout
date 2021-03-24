@@ -16,6 +16,7 @@ class LoginViewModel : ObservableObject {
     
     init() {
         self.passthroughLoginViewModel
+            .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
             .sink { (loginThroughComplete) in
                 // todo
             } receiveValue: { (loginModel) in
@@ -27,6 +28,7 @@ class LoginViewModel : ObservableObject {
             }.store(in: &cancellables)
         
         self.passthroughAuthentication
+            .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
             .sink { (authenThroughComplete) in
                 // todo
             } receiveValue: { (authentication) in
@@ -34,8 +36,10 @@ class LoginViewModel : ObservableObject {
                 case .LoggedIn:
                     self.authentication = Authentication.LoggedIn
                 case .LoggedOut:
-                    LoginService.loggout()
-                    self.authentication = Authentication.LoggedOut
+                    LoginService.loggout { (_) in
+                        self.authentication = Authentication.LoggedOut
+                    }
+                    
                 case .Loadding:
                     self.authentication = Authentication.Loadding
                 }

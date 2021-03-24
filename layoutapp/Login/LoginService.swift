@@ -25,8 +25,12 @@ class LoginService {
         }
     }
     
-    static func loggout()-> Void {
-        deleteToken();
+    static func loggout(completion: @escaping (Bool)->())-> Void {
+        let delay = DispatchTimeInterval.milliseconds(3000)
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            deleteToken()
+            completion(true)
+        }
     }
     
     static func setToken(token: String){
